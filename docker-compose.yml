@@ -1,0 +1,15 @@
+version: "3.7"
+
+# Dockerfileを使わないパターン
+services:
+  python3.9:
+    # DockerHubのイメージ
+    image: python:3.9
+    # requirements.txtからパッケージインストール
+    command: bash -c "pip install --no-cache-dir -r requirements.txt && /bin/bash"
+    working_dir: /usr/src
+    # ホストのカレントをコンテナの/usr/srcと同期する
+    volumes:
+      - ./:/usr/src
+    # ttyとcommandを共存するには/bin/bashが必要？
+    tty: true
